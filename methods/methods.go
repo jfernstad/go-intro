@@ -14,8 +14,8 @@ type Player struct {
 
 // Construct is a method on the Player object
 //
-// func (var T) NAME (arguments)
-// func (var *T) NAME (arguments)  // `var *T` if the method will mutate the object, equivalent to `this`.
+// func (t T) NAME (arguments)
+// func (t *T) NAME (arguments)  // `var *T` if the method will mutate the object, equivalent to `this`.
 //
 func (p *Player) Construct(name string, game string, _ uint64) {
 	// Ignore arguments with underscore `_`
@@ -27,7 +27,7 @@ func (p *Player) Construct(name string, game string, _ uint64) {
 
 // Summary does not mutate Player instance and returns a string and an error
 //
-// func (var T) NAME (arguments) (RET1, RET2)
+// func (t T) NAME (arguments) (RET1, RET2)
 //
 func (p Player) Summary() (string, error) {
 	if p.Highscore > 1000 {
