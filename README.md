@@ -8,6 +8,7 @@ If anyone else can benefit from this, awesome. Go at it. \ʕ◔ϖ◔ʔ/
 1. Types, https://tour.golang.org/basics/11
 1. Defer, https://tour.golang.org/flowcontrol/12
 1. Methods, https://tour.golang.org/methods/1
+1. Composition
 1. Interfaces, https://tour.golang.org/methods/9
 1. Concurrency, https://tour.golang.org/concurrency/1
 1. Web service, bit of reflection, https://blog.golang.org/laws-of-reflection
