@@ -7,22 +7,22 @@ import (
 )
 
 // This should take some time to execute
-func bigTask(done chan bool) {
+func bigTask(taskID int, done chan int) {
 
 	var res float64
-	for idx := 0; idx < 2000000000; idx++ {
+	for idx := 0; idx < 800000000; idx++ {
 		res += math.Cos(float64(idx) / math.Pi)
 	}
-	done <- true
+	done <- taskID
 }
 
 func main() {
 
 	// How many tasks should we run in paralell?
-	concurrency := 3
+	concurrency := 2
 
 	// `channels` can be used to signal between tasks/threads
-	done := make(chan bool, concurrency)
+	done := make(chan int, concurrency)
 
 	// Start tasks and timer
 	start := time.Now()
@@ -31,7 +31,7 @@ func main() {
 		fmt.Printf("Starting task %d\n", idx+1)
 
 		// Magic happens here
-		go bigTask(done)
+		go bigTask(idx+1, done)
 	}
 
 	// Don't wait forever
@@ -44,9 +44,9 @@ func main() {
 
 		// Select blocks until one of the `cases` return (if you have mul)
 		select {
-		case _, ok := <-done: // Read both value and result, `ok` indicated if we were closed or not
+		case taskID, ok := <-done: // Read both value and result, `ok` indicated if we were closed or not
 			if ok {
-				fmt.Printf("%d done, %d to go\n", c+1, concurrency-c-1)
+				fmt.Printf("%d done, %d to go\n", taskID, concurrency-c-1)
 			} else {
 				fmt.Printf(" Aborted \n")
 			}
