@@ -43,6 +43,12 @@ func main() {
 	// Root is of type `http.HandlerFunc`, it will receive all requests on '/'
 	router.Get("/", Root)
 
+	// Lambda functions works well in golang
+	router.Get("/lambda", func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, "Me be a lambda/closure/anonymous function!")
+	})
+
 	// Proudly print the url
 	fmt.Println("")
 	fmt.Println(",.~<oO( 127.0.0.1:3000 )Oo>~.,")
